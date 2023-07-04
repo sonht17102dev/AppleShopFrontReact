@@ -1,0 +1,4 @@
+.category_image a:hover,
+.category_image a:active {
+  opacity: 0.8;
+}

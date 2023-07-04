@@ -1,0 +1,10 @@
+.banner {
+  position: relative;
+}
+
+.banner .content {
+  position: absolute;
+  top: 30%;
+  left: 7%;
+  width: 350px;
+}

@@ -1,0 +1,7 @@
+.navbar .navbar_item a {
+  color: gray;
+}
+.navbar .navbar_item a:hover,
+.navbar .navbar_item a.active {
+  color: orange;
+}
