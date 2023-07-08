@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD
 import { ListGroup } from "react-bootstrap";
 
 export default function CategoryVerticle() {
@@ -27,5 +28,20 @@ export default function CategoryVerticle() {
       <ListGroup.Item action>Keyboard</ListGroup.Item>
       <ListGroup.Item action>Other</ListGroup.Item>
     </ListGroup>
+=======
+import { Stack, ListGroup } from "react-bootstrap";
+
+export default function CategoryVerticle() {
+  return (
+    <Stack gap={3}>
+      <ListGroup defaultActiveKey="#link1">
+        <ListGroup.Item action>Link 1</ListGroup.Item>
+        <ListGroup.Item action disabled>
+          Link 2
+        </ListGroup.Item>
+        <ListGroup.Item action>This one is a button</ListGroup.Item>
+      </ListGroup>
+    </Stack>
+>>>>>>> 9fb4620fcd3c22de340f84755c7b6105d93e5af8
   );
 }
