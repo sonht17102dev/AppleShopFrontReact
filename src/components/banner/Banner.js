@@ -6,7 +6,7 @@ export default function Banner() {
   const navigate = useNavigate();
   const navigateHandler = () => navigate("/shop");
   return (
-    <Container className="banner">
+    <Container className="banner w-75">
       <img src="./images/banner1.jpg" alt="Banner" width="100%" />
       <div className="content">
         <p className="text-secondary">NEW INSPIRATION 2020</p>

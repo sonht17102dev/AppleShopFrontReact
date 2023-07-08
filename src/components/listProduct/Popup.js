@@ -28,7 +28,7 @@ function Popup(props) {
           <Container>
             <Row>
               <Col xs lg="6">
-                <img src={product.img1} width="100%" />
+                <img src={product.img1} width="100%" alt={product.name} />
               </Col>
               <Col xs lg="6">
                 <h2>{product.name}</h2>

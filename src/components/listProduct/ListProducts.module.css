@@ -1,0 +1,27 @@
+.cart_image {
+  width: 18rem;
+  border: none;
+}
+
+.cart_image img {
+  width: 100%;
+}
+.cart_image button:hover,
+.cart_image button:active {
+  opacity: 0.8;
+}
+/* .cart_image {
+  position: relative;
+}
+
+.loading img {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.loaded img {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+} */
