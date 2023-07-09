@@ -3,19 +3,24 @@ import { useSelector, useDispatch } from "react-redux";
 import { showModal, hideModal } from "../../store/index";
 import { Row, Col, Button } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import useHttp from "../hooks/useHttp";
 import Popup from "./Popup";
 import classes from "./ListProducts.module.css";
-const url =
-  "https://firebasestorage.googleapis.com/v0/b/funix-subtitle.appspot.com/o/Boutique_products.json?alt=media&token=dc67a5ea-e3e0-479e-9eaf-5e01bcd09c74";
-
+import { useNavigate } from "react-router-dom";
+const convertCurrency = (currency) => {
+  const formattedCurrency = new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  })
+    .format(Number(currency))
+    .replace("₫", "");
+  return formattedCurrency;
+};
 export default function ListProducts(props) {
-  // console.log(props.typeCategory);
-
+  const navigate = useNavigate();
   const isModalOpen = useSelector((state) => state.modal.isOpen);
   const dispatch = useDispatch();
   const [product, setProduct] = useState({});
-  let listProducts = useHttp(url);
+  let listProducts = props.listProducts;
   if (props.typeCategory !== undefined) {
     listProducts = listProducts.filter((item) => {
       return props.typeCategory !== "All"
@@ -23,7 +28,7 @@ export default function ListProducts(props) {
         : listProducts;
     });
   }
-  const showModelHandler = (event) => {
+  const showModelHandle = (event) => {
     const productById = listProducts.find(
       (item) => item._id.$oid === event.target.id
     );
@@ -37,33 +42,47 @@ export default function ListProducts(props) {
     dispatch(hideModal());
   };
 
+  const navigateDetailHandle = (event) => {
+    console.log(event.target.id);
+    navigate(`/detail/${event.target.id}`);
+  };
   return (
     <Row>
       {listProducts &&
-        listProducts.map((product) => {
-          const currencyValue = product.price;
-          const formattedCurrency = new Intl.NumberFormat("vi-VN", {
-            style: "currency",
-            currency: "VND",
-          })
-            .format(Number(currencyValue))
-            .replace("₫", "");
+        listProducts.map((product, index) => {
+          const formattedCurrency = convertCurrency(product.price);
           return (
-            <Col xs lg={props.items === "4" ? "4" : "3"}>
+            <Col xs lg={props.items === "4" ? "4" : "3"} key={index}>
               <Card className={classes.cart_image}>
-                <Button
-                  variant="outline-light"
-                  onClick={showModelHandler}
-                  className="bg-none"
-                >
-                  <Card.Img
-                    variant="top"
-                    src={product.img1}
-                    key={product._id.$oid}
-                    id={product._id.$oid}
-                    alt={product.name}
-                  />
-                </Button>
+                {props.page === "shop" ? (
+                  <Button
+                    variant="outline-light"
+                    className="bg-none"
+                    onClick={navigateDetailHandle}
+                  >
+                    <Card.Img
+                      variant="top"
+                      src={product.img1}
+                      key={product._id.$oid}
+                      id={product._id.$oid}
+                      alt={product.name}
+                    />
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outline-light"
+                    onClick={showModelHandle}
+                    className="bg-none"
+                  >
+                    <Card.Img
+                      variant="top"
+                      src={product.img1}
+                      key={product._id.$oid}
+                      id={product._id.$oid}
+                      alt={product.name}
+                    />
+                  </Button>
+                )}
                 <Card.Body className="text-center">
                   <Card.Title>{product.name}</Card.Title>
                   <Card.Text>
@@ -75,7 +94,7 @@ export default function ListProducts(props) {
             </Col>
           );
         })}
-      {isModalOpen && (
+      {props.page !== "shop" && isModalOpen && (
         <Popup
           onShow={isModalOpen}
           onData={handleDataFromChild}

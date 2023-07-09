@@ -4,7 +4,9 @@ import Category from "../components/categories/Category";
 import ListProducts from "../components/listProduct/ListProducts";
 import { Container } from "react-bootstrap";
 import OtherService from "../components/listProduct/OtherService";
+import { useLoaderData } from "react-router-dom";
 export default function Home() {
+  const listProducts = useLoaderData();
   return (
     <>
       <Banner />
@@ -12,7 +14,7 @@ export default function Home() {
       <Container className="mt-4 mb-4">
         <p className="text-secondary">MAKE THE HARD WAY</p>
         <h4>TOP TRENDING PRODUCTS</h4>
-        <ListProducts page="Home" />
+        <ListProducts page="Home" listProducts={listProducts} />
         <OtherService />
       </Container>
     </>

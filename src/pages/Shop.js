@@ -3,13 +3,14 @@ import Banner from "../components/banner/Banner";
 import { Col, Container, Row, NavDropdown, Form } from "react-bootstrap";
 import CategoryVerticle from "../components/categories/CategoryVerticle";
 import ListProducts from "../components/listProduct/ListProducts";
+import { useLoaderData } from "react-router-dom";
 
 export default function Shop() {
   const [typeCategory, setTypeCategory] = useState("");
   const handleGetTypeFromChild = (data) => {
     setTypeCategory(data);
   };
-
+  const listProducts = useLoaderData();
   return (
     <>
       <Banner />
@@ -33,18 +34,21 @@ export default function Shop() {
             </Col>
             <Col xs lg="6" className="d-flex justify-content-end">
               <NavDropdown
-                id="nav-dropdown-dark-example"
-                title="Dropdown"
+                id="dropdown"
+                title="Default sorting"
                 menuVariant="dark"
               >
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
+                <NavDropdown.Item>Action</NavDropdown.Item>
+                <NavDropdown.Item>Another action</NavDropdown.Item>
               </NavDropdown>
             </Col>
 
-            <ListProducts items="4" typeCategory={typeCategory} />
+            <ListProducts
+              items="4"
+              typeCategory={typeCategory}
+              page="shop"
+              listProducts={listProducts}
+            />
           </Col>
         </Row>
       </Container>
