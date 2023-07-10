@@ -1,14 +1,10 @@
 import React from "react";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
-import {
-  Col,
-  Container,
-  Row,
-  InputGroup,
-  Button,
-  Form,
-  Card,
-} from "react-bootstrap";
+import { Col, Container, Row, Button, Card } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { amountActions } from "../store/index";
+import { useSelector, useDispatch } from "react-redux";
 const convertCurrency = (currency) => {
   const formattedCurrency = new Intl.NumberFormat("vi-VN", {
     style: "currency",
@@ -19,6 +15,8 @@ const convertCurrency = (currency) => {
   return formattedCurrency;
 };
 export default function Detail() {
+  const dispatch = useDispatch();
+  const amount = useSelector((state) => state.amount.amount);
   const navigate = useNavigate();
   const params = useParams();
   const listProducts = useLoaderData();
@@ -34,15 +32,18 @@ export default function Detail() {
     productById.img4,
   ];
   // console.log(listImg);
+  const incrementHandle = () => {
+    dispatch(amountActions.increment());
+  };
+  const decrementHandle = () => {
+    dispatch(amountActions.decrement());
+  };
   const listProductsByCategory = listProducts.filter(
     (item) =>
       item.category === productById.category &&
       item._id.$oid !== productById._id.$oid
   );
   // console.log(listProductsByCategory);
-  const navigateHandler = () => {
-    navigate("/cart");
-  };
   return (
     <Container className="mt-4 mb-4">
       <Row>
@@ -70,18 +71,30 @@ export default function Detail() {
           <p>
             <strong>CATEGORY:</strong> {productById.category}
           </p>
-          <InputGroup className="mb-3 w-50">
-            <Form.Label>QUANTITY</Form.Label>
-            <Form.Control type="number" placeholder="1" />
+          <div className="mb-3 w-100 d-flex text-center">
+            <div className="d-flex text-center border border-end-0">
+              <div className="align-middle p-3">QUANTITY</div>
+              <div className="d-flex justify-content-center align-item-center p-2">
+                <Button variant="" className="w-25" onClick={decrementHandle}>
+                  <FontAwesomeIcon icon={faPlay} rotation={180} />
+                </Button>
+                <h4 style={{ width: "40px" }}>{amount}</h4>
+                <Button variant="" className="w-25">
+                  <FontAwesomeIcon icon={faPlay} onClick={incrementHandle} />
+                </Button>
+              </div>
+            </div>
             <Button
               variant="dark"
               id="button-addon2"
-              onClick={navigateHandler}
+              onClick={() => {
+                navigate("/cart");
+              }}
               action
             >
               Add to cart
             </Button>
-          </InputGroup>
+          </div>
         </Col>
         <Col xs lg="6" className="mt-4">
           <Button variant="dark" id="button-addon2" className="mb-2">

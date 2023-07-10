@@ -21,7 +21,6 @@ const loader = async () => {
     return resData;
   }
 };
-// const convertCurrency =
 const router = createBrowserRouter([
   {
     path: "/",
@@ -35,7 +34,7 @@ const router = createBrowserRouter([
       },
       { path: "/shop", element: <Shop />, loader: loader },
       { path: "/detail/:id", element: <Detail />, loader: loader },
-      { path: "/cart", element: <Cart /> },
+      { path: "/cart", element: <Cart />, loader: loader },
       { path: "/checkout", element: <Checkout /> },
       { path: "/login", element: <Signin /> },
       { path: "/register", element: <Signup /> },

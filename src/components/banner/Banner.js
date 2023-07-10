@@ -3,7 +3,7 @@ import { Button, Container } from "react-bootstrap";
 import "./Banner.css";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function Banner() {
+function Banner() {
   const navigate = useNavigate();
   const paramsPage = useParams();
   console.log(paramsPage);
@@ -21,3 +21,4 @@ export default function Banner() {
     </Container>
   );
 }
+export default React.memo(Banner);

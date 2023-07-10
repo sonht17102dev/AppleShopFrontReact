@@ -15,7 +15,6 @@ export default function Header() {
         className={`row justify-content-between align-items-center ${classes.navbar}`}
       >
         <div className={`col-lg-2 col-md-3 col-12 ${classes.navbar_item}`}>
-          <FontAwesomeIcon icon={faHouse} />
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -23,23 +22,30 @@ export default function Header() {
             }
             end
           >
-            Home
+            <FontAwesomeIcon icon={faHouse} className="p-2" />
+            <span>Home</span>
           </NavLink>
         </div>
         <div className={`col-lg-2 col-md-3 col-12 ${classes.navbar_item}`}>
-          <FontAwesomeIcon icon={faBagShopping} />
-          <NavLink to="/shop">Shop</NavLink>
+          <NavLink to="/shop">
+            <FontAwesomeIcon icon={faBagShopping} className="p-2" />
+            <span>Shop</span>
+          </NavLink>
         </div>
         <div className="col-lg-2" id="avatar">
           <h1>BOUTIQUE</h1>
         </div>
         <div className={`col-lg-2 col-md-3 col-12 ${classes.navbar_item}`}>
-          <FontAwesomeIcon icon={faCartShopping} />
-          <NavLink to="/cart">Cart</NavLink>
+          <NavLink to="/cart">
+            <FontAwesomeIcon icon={faCartShopping} className="p-2" />
+            <span>Cart</span>
+          </NavLink>
         </div>
         <div className={`col-lg-2 col-md-3 col-12 ${classes.navbar_item}`}>
-          <FontAwesomeIcon icon={faUser} />
-          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/login">
+            <FontAwesomeIcon icon={faUser} className="p-2" />
+            <span>Login</span>
+          </NavLink>
         </div>
       </div>
     </nav>
