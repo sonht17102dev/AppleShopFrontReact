@@ -18,7 +18,8 @@ import {
 import Banner from "../components/banner/Banner";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { amountActions } from "../store";
+import { cartActions } from "../store";
+import { convertCurrency } from "../common/convertCurrency";
 const headingTable = [
   "IMAGE",
   "PRODUCT",
@@ -30,13 +31,25 @@ const headingTable = [
 export default function Cart() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const amount = useSelector((state) => state.amount.amount);
-  const incrementHandle = () => {
-    dispatch(amountActions.increment());
+  // const quantity = useSelector((state) => state.quantity.quantity);
+  const cartItems = useSelector((state) => state.cart.items);
+  console.log(cartItems);
+  const totalPayment = useSelector((state) => state.cart.totalPayment);
+  console.log(totalPayment);
+
+  const incrementHandle = (event) => {
+    const existingItem = cartItems.find(
+      (item) => item.id === event.target.parentNode.id
+    );
+    dispatch(cartActions.incrementQuantityFromCart(existingItem));
   };
-  const decrementHandle = () => {
-    dispatch(amountActions.decrement());
+  const decrementHandle = (event) => {
+    const existingItem = cartItems.find(
+      (item) => item.id === event.target.parentNode.id
+    );
+    dispatch(cartActions.decrementQuantityFromCart(existingItem));
   };
+
   return (
     <Container className="mt-4 mb-4">
       <Banner />
@@ -54,39 +67,52 @@ export default function Cart() {
               </tr>
             </thead>
             <tbody>
-              <tr className="text-center align-middle">
-                <td style={{ width: "10%" }}>
-                  <img
-                    src="https://firebasestorage.googleapis.com/v0/b/funix-way.appspot.com/o/xSeries%2FCCDN%2FReactJS%2FAssignment_Images%2FASM03_Resources%2Fiphone_13_4.jpeg?alt=media&token=dc72dde3-cfa4-4710-9493-ac2aa0ecf249"
-                    alt=""
-                    width="100%"
-                  />
-                </td>
-                <td>Apple iPhone 11 64GB</td>
-                <td>10.999.000 VND</td>
-                <td>
-                  <div className="w-100 d-flex align-item-center text-center">
-                    <Button variant="" className="w-25">
-                      <FontAwesomeIcon
-                        icon={faPlay}
-                        rotation={180}
-                        onClick={decrementHandle}
-                      />
-                    </Button>
-                    <h5 className="p-2">{amount}</h5>
-                    <Button variant="" className="w-25">
-                      <FontAwesomeIcon
-                        icon={faPlay}
-                        onClick={incrementHandle}
-                      />
-                    </Button>
-                  </div>
-                </td>
-                <td>10.999.000 VND</td>
-                <td>
-                  <FontAwesomeIcon icon={faTrashCan} />
-                </td>
-              </tr>
+              {cartItems.map((item) => {
+                const id = item.id;
+                const formattedCurrency = convertCurrency(item.price);
+                const formattedTotalPrice = convertCurrency(item.totalPrice);
+                // console.log();
+                return (
+                  <tr className="text-center align-middle" key={item.id}>
+                    <td style={{ width: "10%" }}>
+                      <img src={item.img} alt={item.name} width="100%" />
+                    </td>
+                    <td>{item.name}</td>
+                    <td>{formattedCurrency} VND</td>
+                    <td>
+                      <div className="w-100 d-flex align-item-center text-center">
+                        <Button variant="" className="w-25" id={id}>
+                          <FontAwesomeIcon
+                            icon={faPlay}
+                            rotation={180}
+                            id={id}
+                            onClick={decrementHandle}
+                          />
+                        </Button>
+                        <h5 className="p-2">{item.quantity}</h5>
+                        <Button variant="" className="w-25" id={id}>
+                          <FontAwesomeIcon
+                            icon={faPlay}
+                            id={id}
+                            onClick={incrementHandle}
+                          />
+                        </Button>
+                      </div>
+                    </td>
+                    <td>{formattedTotalPrice} VND</td>
+                    <td>
+                      <Button
+                        variant=""
+                        onClick={() => {
+                          dispatch(cartActions.removeItemFromCart(id));
+                        }}
+                      >
+                        <FontAwesomeIcon icon={faTrashCan} />
+                      </Button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </Table>
           <Row className="justify-content-between">
@@ -120,7 +146,7 @@ export default function Cart() {
               <Card.Title className="mb-2">CART TOTAL</Card.Title>
               <Card.Text className="d-flex justify-content-between ">
                 <h5>SUBTOTAL</h5>
-                <p>19.779.000 VND</p>
+                <p>{totalPayment} VND</p>
               </Card.Text>
               <Card.Text className="d-flex justify-content-between">
                 <h5>TOTAL</h5>

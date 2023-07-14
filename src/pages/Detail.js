@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { Col, Container, Row, Button, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { amountActions } from "../store/index";
-import { useSelector, useDispatch } from "react-redux";
+import { cartActions } from "../store/index";
+import { useDispatch } from "react-redux";
 const convertCurrency = (currency) => {
   const formattedCurrency = new Intl.NumberFormat("vi-VN", {
     style: "currency",
@@ -14,9 +14,12 @@ const convertCurrency = (currency) => {
     .replace("₫", "");
   return formattedCurrency;
 };
+
 export default function Detail() {
+  const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
-  const amount = useSelector((state) => state.amount.amount);
+  // const quantity = useSelector((state) => state.quantity.quantity);
+
   const navigate = useNavigate();
   const params = useParams();
   const listProducts = useLoaderData();
@@ -32,11 +35,27 @@ export default function Detail() {
     productById.img4,
   ];
   // console.log(listImg);
+
+  const addToCartAndNavigateHandle = () => {
+    dispatch(
+      cartActions.addToCart({
+        id: params.id,
+        img: productById.img1,
+        name: productById.name,
+        price: Number(productById.price),
+        quantity: quantity,
+        totalPrice: quantity * Number(productById.price),
+      })
+    );
+    navigate("/cart");
+  };
   const incrementHandle = () => {
-    dispatch(amountActions.increment());
+    // dispatch(quantityActions.increment());
+    setQuantity((preState) => preState + 1);
   };
   const decrementHandle = () => {
-    dispatch(amountActions.decrement());
+    // dispatch(quantityActions.decrement());
+    setQuantity((preState) => (preState <= 0 ? 1 : preState - 1));
   };
   const listProductsByCategory = listProducts.filter(
     (item) =>
@@ -44,6 +63,7 @@ export default function Detail() {
       item._id.$oid !== productById._id.$oid
   );
   // console.log(listProductsByCategory);
+
   return (
     <Container className="mt-4 mb-4">
       <Row>
@@ -78,18 +98,16 @@ export default function Detail() {
                 <Button variant="" className="w-25" onClick={decrementHandle}>
                   <FontAwesomeIcon icon={faPlay} rotation={180} />
                 </Button>
-                <h4 style={{ width: "40px" }}>{amount}</h4>
-                <Button variant="" className="w-25">
-                  <FontAwesomeIcon icon={faPlay} onClick={incrementHandle} />
+                <h4 style={{ width: "40px" }}>{quantity}</h4>
+                <Button variant="" className="w-25" onClick={incrementHandle}>
+                  <FontAwesomeIcon icon={faPlay} />
                 </Button>
               </div>
             </div>
             <Button
               variant="dark"
               id="button-addon2"
-              onClick={() => {
-                navigate("/cart");
-              }}
+              onClick={addToCartAndNavigateHandle}
               action
             >
               Add to cart

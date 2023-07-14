@@ -1,12 +1,10 @@
 import React from "react";
 import { Button, Container } from "react-bootstrap";
 import "./Banner.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Banner() {
   const navigate = useNavigate();
-  const paramsPage = useParams();
-  console.log(paramsPage);
   const navigateHandler = () => navigate("/shop");
   return (
     <Container className="banner w-75">

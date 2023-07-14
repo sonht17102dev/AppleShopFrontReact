@@ -8,7 +8,7 @@ import { useLoaderData } from "react-router-dom";
 export default function Shop() {
   const [typeCategory, setTypeCategory] = useState("");
   const handleGetTypeFromChild = (data) => {
-    setTypeCategory(data);
+    setTypeCategory(data.toLowerCase());
   };
   const listProducts = useLoaderData();
   return (
@@ -42,7 +42,6 @@ export default function Shop() {
                 <NavDropdown.Item>Another action</NavDropdown.Item>
               </NavDropdown>
             </Col>
-
             <ListProducts
               items="4"
               typeCategory={typeCategory}
