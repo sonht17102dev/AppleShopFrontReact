@@ -55,7 +55,7 @@ export default function Detail() {
   };
   const decrementHandle = () => {
     // dispatch(quantityActions.decrement());
-    setQuantity((preState) => (preState <= 0 ? 1 : preState - 1));
+    setQuantity((preState) => preState - 1);
   };
   const listProductsByCategory = listProducts.filter(
     (item) =>
@@ -95,7 +95,11 @@ export default function Detail() {
             <div className="d-flex text-center border border-end-0">
               <div className="align-middle p-3">QUANTITY</div>
               <div className="d-flex justify-content-center align-item-center p-2">
-                <Button variant="" className="w-25" onClick={decrementHandle}>
+                <Button
+                  variant=""
+                  className={`w-25 ${quantity <= 0 ? "d-none" : "d-block"}`}
+                  onClick={decrementHandle}
+                >
                   <FontAwesomeIcon icon={faPlay} rotation={180} />
                 </Button>
                 <h4 style={{ width: "40px" }}>{quantity}</h4>
@@ -138,6 +142,9 @@ export default function Detail() {
                       id={index}
                       key={index}
                       alt=""
+                      onClick={() => {
+                        navigate(`/detail/${product._id.$oid}`);
+                      }}
                     />
                   </Button>
                   <Card.Body className="text-center">
