@@ -5,3 +5,13 @@
 .navbar .navbar_item a.active {
   color: orange;
 }
+.navbar .navbar_left {
+  justify-content: flex-start;
+  padding-right: 20px;
+}
+.navbar .navbar_mid {
+  justify-content: center;
+}
+.navbar .navbar_right {
+  justify-content: flex-end;
+}

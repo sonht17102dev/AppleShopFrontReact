@@ -15,11 +15,11 @@ import {
   faArrowLeft,
   faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
-import Banner from "../components/banner/Banner";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "../store";
 import { convertCurrency } from "../common/convertCurrency";
+import OtherBanner from "../components/banner/OtherBanner";
 const headingTable = [
   "IMAGE",
   "PRODUCT",
@@ -49,12 +49,11 @@ export default function Cart() {
       (item) => item.id === event.target.parentNode.id
     );
     dispatch(cartActions.decrementQuantityFromCart(existingItem));
-    console.log(cartItems);
   };
 
   return (
     <Container className="mt-4 mb-4">
-      <Banner />
+      <OtherBanner contentBanner="Cart" />
       <Row>
         <h2>SHOPPING CART</h2>
         <Col xs lg="8">

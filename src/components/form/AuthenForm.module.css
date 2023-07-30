@@ -1,8 +1,23 @@
+.loginForm {
+  background-color: #f4f5f9;
+}
 .form {
   max-width: 40rem;
   margin: 2rem auto;
+  width: 50%;
+  text-align: center;
+  border: 1px solid lightblue;
+  padding: 4rem;
+  background-color: white;
 }
-
+.loginForm img {
+  background: none;
+}
+::placeholder {
+  padding: 1.7rem;
+  font-size: larger;
+  font-weight: 600;
+}
 .form label,
 .form input,
 .form textarea {
@@ -10,16 +25,17 @@
   width: 100%;
 }
 
-.form input,
-.form textarea {
+.form input {
   font: inherit;
-  padding: 0.25rem;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+  padding-left: 1rem;
 }
 
 .actions {
   display: flex;
   gap: 1rem;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
 }
 
@@ -33,16 +49,17 @@
   border: none;
 }
 
-.actions a {
+.actions button {
   text-decoration: none;
   background-color: transparent;
-  color: var(--color-gray-300);
+
+  color: blue;
 }
 
 .actions button:hover {
   background-color: var(--color-primary-300);
 }
 
-.actions a:hover {
+.actions button:hover {
   background-color: var(--color-gray-800);
 }

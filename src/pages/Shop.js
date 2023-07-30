@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Banner from "../components/banner/Banner";
 import { Col, Container, Row, NavDropdown, Form } from "react-bootstrap";
 import CategoryVerticle from "../components/categories/CategoryVerticle";
 import ListProducts from "../components/listProduct/ListProducts";
 import { useLoaderData } from "react-router-dom";
+import OtherBanner from "../components/banner/OtherBanner";
 
 export default function Shop() {
   const [typeCategory, setTypeCategory] = useState("");
@@ -13,7 +13,7 @@ export default function Shop() {
   const listProducts = useLoaderData();
   return (
     <>
-      <Banner />
+      <OtherBanner contentBanner="Cart" />
       <Container className="w-75">
         <Row>
           <Col xs lg="3">
@@ -38,8 +38,7 @@ export default function Shop() {
                 title="Default sorting"
                 menuVariant="dark"
               >
-                <NavDropdown.Item>Action</NavDropdown.Item>
-                <NavDropdown.Item>Another action</NavDropdown.Item>
+                <NavDropdown.Item>Sort By Name</NavDropdown.Item>
               </NavDropdown>
             </Col>
             <ListProducts
