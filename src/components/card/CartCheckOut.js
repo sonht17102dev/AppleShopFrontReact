@@ -1,11 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import { useSelector } from "react-redux";
 import { convertCurrency } from "../../common/convertCurrency";
-export default function CartCheckOut() {
-  const cartItems = useSelector((state) => state.cart.items);
-  // console.log(cartItems);
-  const totalPayment = useSelector((state) => state.cart.totalPayment);
+export default function CartCheckOut({ cartItems, totalPayment }) {
   return (
     <Card className="p-2">
       <Card.Body>

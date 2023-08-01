@@ -32,7 +32,7 @@ export default function OtherService() {
               placeholder="Enter your email address"
               aria-describedby="basic-addon2"
             />
-            <Button variant="secondary" id="button-addon2">
+            <Button variant="secondary">
               Subscibe
             </Button>
           </InputGroup>
