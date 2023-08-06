@@ -2,3 +2,9 @@
 .category_image a:active {
   opacity: 0.8;
 }
+.category_image a img {
+  width: 100%;
+}
+.titleList {
+  background-color: #f8f9fa !important;
+}

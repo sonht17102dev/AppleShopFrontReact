@@ -1,7 +1,14 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
+import classes from "./Category.module.css";
 
 export default function CategoryVerticle(props) {
+  /**
+    Hàm xử lý truyền loại sản phẩm tương ứng lên trang Shop
+    Bên trang Shop sẽ dựa trên giá trị được truyền để 
+    render loại sản phẩm
+   */
+    
   const handleGetAction = (event) => {
     props.onData(event.target.textContent);
   };
@@ -13,7 +20,7 @@ export default function CategoryVerticle(props) {
       <ListGroup.Item action onClick={handleGetAction}>
         All
       </ListGroup.Item>
-      <ListGroup.Item variant="light" className="fw-bold" disabled>
+      <ListGroup.Item className={`fw-bold ${classes.titleList}`} disabled>
         IPHONE & MAC
       </ListGroup.Item>
       <ListGroup.Item action onClick={handleGetAction}>
@@ -26,7 +33,7 @@ export default function CategoryVerticle(props) {
         Macbook
       </ListGroup.Item>
 
-      <ListGroup.Item variant="light" className="fw-bold" disabled>
+      <ListGroup.Item className={`fw-bold ${classes.titleList}`} disabled>
         WIRELESS
       </ListGroup.Item>
       <ListGroup.Item action onClick={handleGetAction}>
@@ -35,7 +42,7 @@ export default function CategoryVerticle(props) {
       <ListGroup.Item action onClick={handleGetAction}>
         Watch
       </ListGroup.Item>
-      <ListGroup.Item variant="light" className="fw-bold" disabled>
+      <ListGroup.Item className={`fw-bold ${classes.titleList}`} disabled>
         OTHER
       </ListGroup.Item>
       <ListGroup.Item action onClick={handleGetAction}>

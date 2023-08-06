@@ -10,12 +10,16 @@ function Popup(props) {
   const product = props.dataProduct;
   const [show, setShow] = useState(props.onShow);
   const navigate = useNavigate();
+
+  // Hàm xử lý đóng modal
   const handleClose = () => {
     setShow(false);
     props.onData(show);
   };
+  // Xử lý thay đổi currency 
   const formattedCurrency = convertCurrency(product.price);
 
+  // Hàm điều hướng đến trang Detail render theo id sản phẩm
   const navigateSuccessHandle = () => {
     navigate(`/detail/${product._id.$oid}`);
     handleClose();
@@ -32,11 +36,11 @@ function Popup(props) {
             <Col xs lg="6">
               <h2>{product.name}</h2>
               <p>{formattedCurrency} VND</p>
-              <p>{product.long_desc}</p>
+              <p style={{ whiteSpace: "pre-line" }}>{product.long_desc}</p>
 
-              <Button variant="secondary" onClick={navigateSuccessHandle}>
-                <FontAwesomeIcon icon={faCartShopping} />
-                View Detail
+              <Button variant="dark" onClick={navigateSuccessHandle}>
+                <FontAwesomeIcon icon={faCartShopping} className="px-2" />
+                <span className="px-2">View Detail</span>
               </Button>
             </Col>
           </Row>

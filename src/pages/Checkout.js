@@ -10,19 +10,19 @@ export default function Checkout() {
   // console.log(cartItems);
   const totalPayment = useSelector((state) => state.cart.totalPayment);
   return (
-    <Container>
-      <Row>
-        <OtherBanner contentBanner="Checkout" />
-      </Row>
-      <Row className="mt-5 mb-5">
-        <h4 className="mb-4">BILLING DETAILS</h4>
-        <Col xs lg="8">
-          <FormCheckOut cartItems={cartItems} totalPayment={totalPayment} />
-        </Col>
-        <Col xs lg="4">
-          <CartCheckOut cartItems={cartItems} totalPayment={totalPayment} />
-        </Col>
-      </Row>
-    </Container>
+    <>
+      <OtherBanner contentBanner="Checkout" />
+      <Container className="w-75">
+        <Row className="my-5">
+          <h4 className="mb-4">BILLING DETAILS</h4>
+          <Col xs lg="8">
+            <FormCheckOut cartItems={cartItems} totalPayment={totalPayment} />
+          </Col>
+          <Col xs lg="4">
+            <CartCheckOut cartItems={cartItems} totalPayment={totalPayment} />
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 }

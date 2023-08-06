@@ -1,0 +1,9 @@
+.service-link p {
+  line-height: 0.5rem;
+}
+.service-link p a {
+  color: grey;
+}
+.service-link p a:hover {
+  color: rgb(255, 249, 249);
+}

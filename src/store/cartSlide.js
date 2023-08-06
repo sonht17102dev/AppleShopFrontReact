@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+
+
 export const cartSlide = createSlice({
   name: "cart",
   initialState: {
@@ -7,6 +9,7 @@ export const cartSlide = createSlice({
     totalPayment: JSON.parse(localStorage.getItem("totalPayment")) || [0],
   },
   reducers: {
+    // Xử lý thêm product trong trang Detail vào cart
     addToCart(state, action) {
       const newItem = action.payload;
       // tìm item có trong list cart dựa trên id
@@ -32,6 +35,7 @@ export const cartSlide = createSlice({
       localStorage.setItem("listCart", JSON.stringify(state.items));
       localStorage.setItem("totalPayment", JSON.stringify(state.totalPayment));
     },
+    // Xử lý tăng quantity trong trang Cart
     incrementQuantityFromCart(state, action) {
       const itemFromCart = action.payload;
       const existingItem = state.items.find(
@@ -46,6 +50,7 @@ export const cartSlide = createSlice({
       localStorage.setItem("listCart", JSON.stringify(state.items));
       localStorage.setItem("totalPayment", JSON.stringify(state.totalPayment));
     },
+    // Xử lý giảm quantity trong trang Cart
     decrementQuantityFromCart(state, action) {
       const itemFromCart = action.payload;
       const existingItem = state.items.find(
@@ -65,6 +70,7 @@ export const cartSlide = createSlice({
       localStorage.setItem("listCart", JSON.stringify(state.items));
       localStorage.setItem("totalPayment", JSON.stringify(state.totalPayment));
     },
+    // Xử lý xóa sản phẩm
     removeItemFromCart(state, action) {
       const id = action.payload;
       const existingItem = state.items.find((item) => item.id === id);

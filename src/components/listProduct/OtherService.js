@@ -1,10 +1,11 @@
 import React from "react";
-import { Button, Col, Container, InputGroup, Row, Form } from "react-bootstrap";
+import { Button, Col, Container, Row, Form } from "react-bootstrap";
 
+// Component OtherService render các loại service dạng tĩnh
 export default function OtherService() {
   return (
-    <Container className="mt-4 mb-4">
-      <Row className="justify-content-center align-item-center text-center">
+    <Container className="my-4">
+      <Row className="justify-content-center align-item-center text-center bg-light p-5">
         <Col xs lg="4">
           <h3>FREE SHIPPING</h3>
           <p className="text-secondary">Free shipping worldwide</p>
@@ -18,7 +19,7 @@ export default function OtherService() {
           <p className="text-secondary">Free shipping worldwide</p>
         </Col>
       </Row>
-      <Row className="mt-4 mb-4">
+      <Row className="my-5">
         <Col xs lg="6">
           <h3>LET'S BE FRIENDS!</h3>
           <p className="text-secondary">
@@ -27,15 +28,13 @@ export default function OtherService() {
         </Col>
 
         <Col xs lg="6">
-          <InputGroup className="mb-3">
+          <div className="d-flex my-3">
             <Form.Control
               placeholder="Enter your email address"
               aria-describedby="basic-addon2"
             />
-            <Button variant="secondary">
-              Subscibe
-            </Button>
-          </InputGroup>
+            <Button variant="dark">Subscibe</Button>
+          </div>
         </Col>
       </Row>
     </Container>

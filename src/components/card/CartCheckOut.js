@@ -1,6 +1,8 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import { convertCurrency } from "../../common/convertCurrency";
+
+
 export default function CartCheckOut({ cartItems, totalPayment }) {
   return (
     <Card className="p-2">

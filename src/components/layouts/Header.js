@@ -1,41 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCartShopping,
+  faUser,
+  faCaretDown,
+} from "@fortawesome/free-solid-svg-icons";
+import { Button } from "react-bootstrap";
 import classes from "./Header.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { authenActions } from "../../store";
 export default function Header() {
+  // State isShowDropdown xử lý hiển thị ẩn/hiện khi click vào tên user đã login
+  const [isShowDropdown, setIsShowDropdown] = useState(false);
+
   const dispatch = useDispatch();
+
+  // biến isAuthen được lấy từ store authen để quản lý login / logout
   const isAuthen = useSelector((state) => state.authen.isAuthenticated);
-  // console.log(isAuthen);
+
+  // biến currentUser được lấy từ store authen để quản lý user đã đăng nhập và hoạt động
   const currentUser = useSelector((state) => state.authen.currentUser);
-  console.log(currentUser);
+  // console.log(currentUser);
+
+  // Hàm xử lý log out
   const logoutHandler = () => {
     dispatch(authenActions.logout());
   };
   return (
-    <nav className="container mt-3">
+    <nav className="container mt-3 w-75">
       <div className={`row ${classes.navbar}`}>
         <div className={`col-lg-4 d-flex ${classes.navbar_left}`}>
-          <div className={`col-lg-2 col-md-3  ${classes.navbar_item}`}>
+          <div className={`col-lg-2 col-md-3  ${classes.navbar_item} `}>
             <NavLink
               to="/"
               className={`({ isActive }) =>
                 isActive ? classes.active : undefined
-              d-flex gx-4`}
+              d-flex`}
               end
             >
               Home
             </NavLink>
           </div>
 
-          <div className={`col-lg-2 col-md-3 ${classes.navbar_item}`}>
+          <div className={`col-lg-2 col-md-3 ${classes.navbar_item} `}>
             <NavLink
               to="/shop"
               className={`({ isActive }) =>
                 isActive ? classes.active : undefined
-               d-flex gx-4`}
+               d-flex`}
             >
               Shop
             </NavLink>
@@ -43,7 +56,6 @@ export default function Header() {
         </div>
         <div
           className={`col-lg-4 d-flex justify-content-center ${classes.navbar_mid}`}
-          id="avatar"
         >
           <h3>BOUTIQUE</h3>
         </div>
@@ -53,22 +65,42 @@ export default function Header() {
               to="/cart"
               className={`({ isActive }) =>
                 isActive ? classes.active : undefined
-              d-flex gx-4`}
+              d-flex `}
             >
-              <FontAwesomeIcon icon={faCartShopping} className="p-2" />
+              <FontAwesomeIcon icon={faCartShopping} className="p-1" />
               <span>Cart</span>
             </NavLink>
           </div>
           <div className={`col-lg-2 col-md-3 ${classes.navbar_item}`}>
-            <NavLink
-              to="/login"
-              className={`({ isActive }) =>
+            {isAuthen ? (
+              <NavLink
+                // to="/login"
+                className={`({ isActive }) =>
                 isActive ? classes.active : undefined
-              d-flex gx-4`}
-            >
-              <FontAwesomeIcon icon={faUser} className="p-2" />
-              <span>{isAuthen ? currentUser.fullName : "Login"}</span>
-            </NavLink>
+              d-flex ${classes.dropdownBtn}`}
+                onClick={() => setIsShowDropdown(!isShowDropdown)}
+              >
+                <FontAwesomeIcon icon={faUser} className="p-1" />
+                <span>{currentUser.fullName}</span>
+                <FontAwesomeIcon icon={faCaretDown} className="p-1" />
+                {isShowDropdown && (
+                  <div className={`${classes.dropdownAccount}`}>
+                    <Button variant="secondary">action</Button>
+                    <Button variant="secondary">action</Button>
+                  </div>
+                )}
+              </NavLink>
+            ) : (
+              <NavLink
+                to="/login"
+                className={`({ isActive }) =>
+                isActive ? classes.active : undefined
+              d-flex `}
+              >
+                <FontAwesomeIcon icon={faUser} className="p-1" />
+                <span>Login</span>
+              </NavLink>
+            )}
           </div>
           {isAuthen ? (
             <div className={`${classes.navbar_item}`}>
@@ -76,7 +108,7 @@ export default function Header() {
                 onClick={logoutHandler}
                 className={`({ isActive }) =>
                 isActive ? classes.active : undefined
-              d-flex gx-4`}
+              d-flex `}
               >
                 <span>(Log out)</span>
               </NavLink>

@@ -53,7 +53,6 @@ export default function FormCheckOut({ cartItems, totalPayment }) {
   } = useInput((value) => value.trim() !== "" && !isNaN(value));
 
   let formIsValid = false;
-  // const existUser = userArr.find((user) => user.email === enteredEmail);
 
   if (
     enteredEmailIsValid &&
@@ -72,6 +71,7 @@ export default function FormCheckOut({ cartItems, totalPayment }) {
     if (!enteredFullNameIsValid) {
       return;
     } else {
+      // push dữ liệu nhập từ form vào array orderList
       orderList.push({
         email: enteredEmail,
         fullName: enteredFullName,
@@ -80,15 +80,21 @@ export default function FormCheckOut({ cartItems, totalPayment }) {
         listCart: cartItems,
         totalPayment: totalPayment,
       });
+
+      // Thêm dữ liệu vào localStorage
       localStorage.setItem("orderList", JSON.stringify(orderList));
+
       // reset input khi người dùng submit
       resetEmailInput();
       resetAddressInput();
       resetFullNameInput();
       resetPhoneInput();
-
-      // Sử dụng toast api xử lý thông báo đăng kí thành công
-      // và switch form register -> login
+      
+      /**
+       * Sử dụng toast api xử lý thông báo đăng kí thành công
+       * và switch form register -> login
+       */
+      
       toast.success("🛒 Your order are committed! Continue shopping!", {
         position: "top-left",
         autoClose: 2000,
@@ -152,7 +158,7 @@ export default function FormCheckOut({ cartItems, totalPayment }) {
             <p className="text-danger">Please enter a valid address.</p>
           )}
         </Form.Group>
-        <Button variant="secondary" type="submit" disabled={!formIsValid}>
+        <Button variant="dark" type="submit" disabled={!formIsValid}>
           Place order
         </Button>
       </Form>

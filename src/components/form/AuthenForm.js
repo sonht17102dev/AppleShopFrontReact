@@ -8,6 +8,7 @@ import { authenActions } from "../../store";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// Biến userArr được lấy từ localStorage
 const userArr = JSON.parse(localStorage.getItem("userArr")) || [];
 
 function AuthenForm() {
@@ -106,9 +107,9 @@ function AuthenForm() {
       resetEmailInput();
       resetPasswordInput();
       // Sử dụng toast api xử lý thông báo đăng nhập thành công
-      toast.success("🩲 Login successfully!", {
+      toast.success("🎉🎉🎉 Login successfully!", {
         position: "top-left",
-        autoClose: 2000,
+        autoClose: 500,
         hideProgressBar: true,
         closeOnClick: true,
       });
@@ -149,9 +150,9 @@ function AuthenForm() {
 
       // Sử dụng toast api xử lý thông báo đăng kí thành công
       // và switch form register -> login
-      toast.success("👙 Hello new member! Please login and enjoy!", {
+      toast.success("💖💖💖 Hello new member! Please login and enjoy!", {
         position: "top-left",
-        autoClose: 2000,
+        autoClose: 500,
         hideProgressBar: true,
         closeOnClick: true,
       });
@@ -170,7 +171,9 @@ function AuthenForm() {
       >
         {isLogin ? (
           <Form className={classes.form} onSubmit={formLoginHandler}>
-            <h1 className="mb-4">{isLogin ? "Sign In" : "Sign Up"}</h1>
+            <h1 className="text-secondary">
+              {isLogin ? "Sign In" : "Sign Up"}
+            </h1>
 
             <Form.Control
               id="email"
@@ -204,10 +207,18 @@ function AuthenForm() {
             >
               SIGN IN
             </Button>
+            <div className={classes.actions}>
+              {isLogin ? "Create an account?" : "Login?"}
+              <button onClick={changedPageHandle} type="button">
+                {isLogin ? "Sign up" : "Click"}
+              </button>
+            </div>
           </Form>
         ) : (
           <Form className={classes.form} onSubmit={formRegisterHandler}>
-            <h1 className="mb-4">{isLogin ? "Sign In" : "Sign Up"}</h1>
+            <h1 className="mb-5 text-secondary">
+              {isLogin ? "Sign In" : "Sign Up"}
+            </h1>
 
             <Form.Control
               id="fullName"
@@ -266,15 +277,15 @@ function AuthenForm() {
             >
               SIGN UP
             </Button>
+            <div className={classes.actions}>
+              {isLogin ? "Create an account?" : "Login?"}
+              <button onClick={changedPageHandle} type="button">
+                {isLogin ? "Sign up" : "Click"}
+              </button>
+            </div>
           </Form>
         )}
 
-        <div className={classes.actions}>
-          {isLogin ? "Create an account?" : "Login?"}
-          <button onClick={changedPageHandle} type="button">
-            {isLogin ? "Sign up" : "Click"}
-          </button>
-        </div>
         {/* <Button onClick={() => navigate("/")}>Back to Home</Button> */}
       </div>
     </>

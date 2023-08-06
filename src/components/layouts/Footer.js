@@ -1,5 +1,7 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import "./Footer.css";
 const servicesLink = [
   "Help & Contact Us",
   "Return & Refunds",
@@ -13,29 +15,36 @@ const companyLink = [
   "FAQs",
 ];
 const socialLink = ["Twitter", "Intagram", "Facebook", "Tiktok"];
+
 export default function Footer() {
   return (
-    <Container className="bg-dark text-light">
+    <div className="bg-dark text-secondary w-100 p-5">
       <Row className="justify-content-md-center">
-        <Col xs lg="3">
-          <h4>CUSTOMER SERVICES</h4>
+        <Col xs lg="3" className="service-link">
+          <h4 className="text-light mb-4">CUSTOMER SERVICES</h4>
           {servicesLink.map((item, i) => (
-            <p key={i}>{item}</p>
+            <p key={i}>
+              <Link>{item}</Link>
+            </p>
           ))}
         </Col>
-        <Col xs lg="3">
-          <h4>CUSTOMER SERVICES</h4>
+        <Col xs lg="3" className="service-link">
+          <h4 className="text-light mb-4">COMPANY</h4>
           {companyLink.map((item, i) => (
-            <p key={i}>{item}</p>
+            <p key={i}>
+              <Link>{item}</Link>
+            </p>
           ))}
         </Col>
-        <Col xs lg="3">
-          <h4>CUSTOMER SERVICES</h4>
+        <Col xs lg="3" className="service-link">
+          <h4 className="text-light mb-4">SOCIAL MEDIA</h4>
           {socialLink.map((item, i) => (
-            <p key={i}>{item}</p>
+            <p key={i}>
+              <Link>{item}</Link>
+            </p>
           ))}
         </Col>
       </Row>
-    </Container>
+    </div>
   );
 }

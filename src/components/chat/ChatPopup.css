@@ -1,30 +1,37 @@
+.chatLayout {
+  position: fixed;
+  top: 10%;
+  right: 5.5%;
+  width: 30rem;
+  height: 50px;
+  background-color: white;
+}
+
 .chatIcon {
   position: fixed;
   top: 75%;
-  /* left: 3%; */
   right: 3%;
   width: 50px;
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
 }
+
 .chatPopup {
   position: fixed;
   top: 80%;
   left: 3%;
-  z-index: 100;
 }
 .userMessage {
   display: flex;
   justify-content: flex-end;
-  background-color: #48B0F7;
-  color: #D7F2FC;
+  background-color: #48b0f7;
+  color: #d7f2fc;
   margin-bottom: 1.5rem;
   border-radius: 8px;
 }
 .adminMessage {
-  
-  background-color: #F5F6F7;
+  background-color: #f5f6f7;
   color: #67696b;
   margin-bottom: 1.5rem;
   border-radius: 8px;

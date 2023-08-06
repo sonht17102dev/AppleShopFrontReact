@@ -8,7 +8,9 @@ import classes from "./ListProducts.module.css";
 import { convertCurrency } from "../../common/convertCurrency";
 import { useNavigate } from "react-router-dom";
 
+// component ListProducts được tái sử dụng ở trang Home và Shop
 export default function ListProducts(props) {
+  // state isModalOpen xử lý ẩn/ hiện modal
   const isModalOpen = useSelector((state) => state.modal.isOpen);
   const [product, setProduct] = useState({});
   const dispatch = useDispatch();
@@ -22,8 +24,10 @@ export default function ListProducts(props) {
         ? props.typeCategory === item.category
         : props.listProducts;
     });
-    // console.log(listProducts);
+    console.log(listProducts);
   }
+
+  //  Hàm xử lý khi modal được show và render theo id sản phẩm
   const showModelHandle = (event) => {
     const productById = listProducts.find(
       (item) => item._id.$oid === event.target.id
@@ -31,10 +35,12 @@ export default function ListProducts(props) {
     setProduct(productById);
     dispatch(showModal());
   };
+  // State quản lý dữ liệu từ component Con
   const [dataFromChild, setDataFromChild] = useState(false);
+
   // console.log(dataFromChild);
-  const handleDataFromChild = (data) => {
-    // console.log(data);
+  // hàm xử lý nhận dữ liệu truyền từ component con Popup
+  const handleDataFromChild = () => {
     setDataFromChild(dataFromChild);
     dispatch(hideModal());
   };

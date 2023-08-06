@@ -8,3 +8,8 @@
   left: 7%;
   width: 350px;
 }
+.containerOther {
+  height: 250px;
+  background-color: #f8f9fa;
+  width: 75%;
+}

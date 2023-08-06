@@ -11,6 +11,11 @@ import SigninAndRegister from "./pages/SigninAndRegister";
 
 const url =
   "https://firebasestorage.googleapis.com/v0/b/funix-subtitle.appspot.com/o/Boutique_products.json?alt=media&token=dc67a5ea-e3e0-479e-9eaf-5e01bcd09c74";
+
+/**
+ * Hàm loader xử lý bất đồng bộ dữ liệu được trả về từ server backend
+ * chia sẻ dữ liệu cho các component khác nhau
+ */
 const loader = async () => {
   const response = await fetch(url);
 
@@ -21,6 +26,10 @@ const loader = async () => {
     return resData;
   }
 };
+/**
+ *  Sử dụng hàm createBrowserRouter của react-router-dom
+ *  cấu hình đường dẫn url hiển thị theo các trang cho trang web
+ */
 const router = createBrowserRouter([
   {
     path: "/",

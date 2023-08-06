@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import classes from "./Category.module.css";
 export default function Category() {
   return (
-    <Container className="w-75">
+    <Container className="w-75 my-4">
       <div className="text-center categories-heading">
         <p className="text-secondary">CAREFULLY CREATED COLLECTIONS</p>
         <h4 className="text-dark">BROWSE OUR CATEGORIES</h4>
