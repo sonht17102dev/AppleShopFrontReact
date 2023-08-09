@@ -5,8 +5,24 @@
   width: 30rem;
   height: 50px;
   background-color: white;
+  border: none;
+  animation: shake 0.5s;
 }
-
+.chatLayout > div {
+  border: 1px solid rgba(0, 0, 0, 0.175);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+@keyframes shake {
+  0% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
 .chatIcon {
   position: fixed;
   top: 75%;

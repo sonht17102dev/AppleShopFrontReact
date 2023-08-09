@@ -5,6 +5,15 @@
 
 .cart_image img {
   width: 100%;
+  animation: zoom 0.5s;
+}
+@keyframes zoom {
+  from {
+    width: 50%;
+  }
+  to {
+    width: 100%;
+  }
 }
 .cart_image button:hover,
 .cart_image button:active {
