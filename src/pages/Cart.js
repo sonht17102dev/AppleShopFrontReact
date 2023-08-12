@@ -32,7 +32,6 @@ export default function Cart() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
   const cartItems = useSelector((state) => state.cart.items);
   // console.log(cartItems);
   const totalPayment = useSelector((state) => state.cart.totalPayment);
@@ -40,12 +39,11 @@ export default function Cart() {
 
   // Hàm xử lý khi người dùng tăng quantity sản phẩm và tính toán lại totalPayment
   const incrementHandle = (event) => {
-    
     const existingItem = cartItems.find(
       (item) => item.id === event.target.parentNode.id
     );
+    // console.log(existingItem.quantity);
     dispatch(cartActions.incrementQuantityFromCart(existingItem));
-    console.log(cartItems);
   };
   // Hàm xử lý khi người dùng giảm quantity sản phẩm và tính toán lại totalPayment
   const decrementHandle = (event) => {
@@ -53,6 +51,7 @@ export default function Cart() {
       (item) => item.id === event.target.parentNode.id
     );
     dispatch(cartActions.decrementQuantityFromCart(existingItem));
+    console.log(existingItem.quantity);
   };
 
   return (
@@ -87,20 +86,11 @@ export default function Cart() {
                       <td>{formattedCurrency} VND</td>
                       <td>
                         <div className="w-100 d-flex align-item-center text-center">
-                          <Button
-                            variant=""
-                            className={`w-25 ${
-                              item.quantity === 0 ? "d-none" : "d-block"
-                            }`}
-                            id={id}
-                          >
+                          <Button variant="" className="w-25" id={id}>
                             <FontAwesomeIcon
                               icon={faPlay}
                               rotation={180}
                               id={id}
-                              className={`${
-                                item.quantity === 0 ? "d-none" : "d-block"
-                              }`}
                               onClick={decrementHandle}
                             />
                           </Button>

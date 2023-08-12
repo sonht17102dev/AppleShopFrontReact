@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 export const cartSlide = createSlice({
   name: "cart",
   initialState: {
@@ -57,18 +56,26 @@ export const cartSlide = createSlice({
         (item) => item.id === itemFromCart.id
       );
       if (existingItem) {
-        if (existingItem.quantity <= 0) {
-          existingItem.quantity = 1;
-          existingItem.totalPrice = existingItem.price;
-          state.totalPayment[0] = existingItem.price;
+        if (existingItem.quantity === 1) {
+          state.totalQuantity--;
+          state.items = state.items.filter(
+            (item) => item.id !== existingItem.id
+          );
+          state.totalPayment[0] -= existingItem.totalPrice;
+          localStorage.removeItem("listCart");
+          localStorage.removeItem("totalPayment");
         } else {
           existingItem.quantity--;
           existingItem.totalPrice -= itemFromCart.price;
           state.totalPayment[0] -= itemFromCart.price;
         }
+      } else {
+        localStorage.setItem("listCart", JSON.stringify(state.items));
+        localStorage.setItem(
+          "totalPayment",
+          JSON.stringify(state.totalPayment)
+        );
       }
-      localStorage.setItem("listCart", JSON.stringify(state.items));
-      localStorage.setItem("totalPayment", JSON.stringify(state.totalPayment));
     },
     // Xử lý xóa sản phẩm
     removeItemFromCart(state, action) {

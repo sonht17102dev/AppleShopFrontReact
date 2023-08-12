@@ -8,6 +8,8 @@ import { useDispatch } from "react-redux";
 import { convertCurrency } from "../common/convertCurrency";
 
 export default function Detail() {
+  // State quản lý disabledButton
+  const [disabledButton, setDisabledButton] = useState(false);
   //State quantity quản lý số lượng sản phẩm
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
@@ -49,11 +51,24 @@ export default function Detail() {
   };
   // Hàm xử lý tăng quantity của 1 sản phẩm
   const incrementHandle = () => {
-    setQuantity((preState) => preState + 1);
+    setQuantity((preState) => {
+      // console.log(preState);
+      if (preState === 0) {
+        setDisabledButton(false);
+      }
+      return preState + 1;
+    });
   };
   // Hàm xử lý giảm quantity của 1 sản phẩm
   const decrementHandle = () => {
-    setQuantity((preState) => preState - 1);
+    setQuantity((preState) => {
+      // console.log(preState);
+      if (preState < 2) {
+        setDisabledButton(true);
+      }
+      return preState - 1;
+    });
+    // console.log(quantity);
   };
 
   // Danh sách các sản phẩm tượng tụ dựa trên loại sản phẩm
@@ -107,7 +122,7 @@ export default function Detail() {
               <div className="d-flex justify-content-center align-item-center p-2">
                 <Button
                   variant=""
-                  className={`w-25 ${quantity <= 0 ? "d-none" : "d-block"}`}
+                  className={`w-25 ${quantity < 1 ? "d-none" : "d-block"}`}
                   onClick={decrementHandle}
                 >
                   <FontAwesomeIcon icon={faPlay} rotation={180} />
@@ -122,7 +137,7 @@ export default function Detail() {
               variant="dark"
               id="button-addon2"
               onClick={addToCartAndNavigateHandle}
-              action
+              disabled={disabledButton}
             >
               Add to cart
             </Button>
